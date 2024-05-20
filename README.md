@@ -3,7 +3,7 @@
 
 
 
-![alt text](IMAGES\ilustracia.jpg)
+![alt text](IMAGES/ilustracia.jpg)
 
 
 
@@ -46,7 +46,7 @@ Ak to policajt splní tak sa zobrazí správa v hracom okne:
 
 
 
-![alt text](IMAGES\message1.jpg)
+![alt text](IMAGES/message1.jpg)
 
 
 
@@ -56,7 +56,7 @@ Ak to policajt nesplní tak sa zobrazí správa v hracom okne:
 
 
 
-![alt text](IMAGES\message2.jpg)
+![alt text](IMAGES/message2.jpg)
 
 
 
