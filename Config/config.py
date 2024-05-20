@@ -16,3 +16,5 @@ STEP = 5  # Pohyb policajta o 5
 FPS = 25
 
 ZVUK_KOLIZIE = pygame.mixer.Sound("Zvuky/zvuk1.mp3")
+TRVANIE_HRY = 30000 # 1/2 minúty
+POCET_POKUT = 7
