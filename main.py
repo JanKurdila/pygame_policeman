@@ -1,6 +1,7 @@
 import pygame
 from Config import config
 import sys
+import random
 
 def move_policeman(x_coordinate, y_coordinate, keys):
     """Funkcia rieši pohyb policajta podľa stlačenia klávies smeru"""
@@ -18,13 +19,20 @@ def move_policeman(x_coordinate, y_coordinate, keys):
             y_coordinate += config.STEP  # Pohyb policajta nadol
     return x_coordinate, y_coordinate
 
+def generate_car(game_res, car_image):
+    """Funkcia zabezpečí náhodne vygenerovanie auta na náhodnej pozícii"""
+    car_width, car_height = car_image.get_size()
+    x = random.randint(0, game_res[0] - car_width)
+    y = random.randint(0, game_res[1] - car_height)
+    return car_image, (x, y)
+
 if __name__ == "__main__":
     pygame.init()
     window = pygame.display.set_mode(config.ROZLISENIE)
     pygame.display.set_caption("Policajt verzus auta")
 
     policajt = config.POLICAJT
-    auto = config.AUTO
+    auto, auto_position = generate_car(config.ROZLISENIE, config.AUTO)
 
     x, y = config.ROZLISENIE[0] // 2, config.ROZLISENIE[1] // 2 # Inicializácia pozície policajta
 
@@ -43,7 +51,7 @@ if __name__ == "__main__":
         window.fill(config.FARBA_POZADIA)  # Premazanie obrazovky
 
         window.blit(policajt, (x, y))
-        window.blit(auto, (config.ROZLISENIE[0] // 10, config.ROZLISENIE[1] // 10))
+        window.blit(auto, auto_position)
 
         pygame.display.update()
 
