@@ -39,6 +39,9 @@ if __name__ == "__main__":
     window = pygame.display.set_mode(config.ROZLISENIE)
     pygame.display.set_caption("Policajt verzus auta")
 
+    font = config.FONT_SCORE_TEXT
+    score = 0
+
     policajt = config.POLICAJT
     policajt_mask = pygame.mask.from_surface(policajt)
     x, y = config.ROZLISENIE[0] // 2, config.ROZLISENIE[1] // 2 # Inicializácia pozície policajta
@@ -46,6 +49,8 @@ if __name__ == "__main__":
     auto, auto_position, auto_mask = generate_car(config.ROZLISENIE, config.AUTO)
 
     clock = pygame.time.Clock()
+
+    stala_sa_kolizia = False
 
     while True:
         # Ak vypnem okno, musím vypnuť pygame
@@ -63,7 +68,15 @@ if __name__ == "__main__":
         window.blit(auto, auto_position)
         
         if is_collision(policajt_mask, auto_mask, (x, y), auto_position):
-            print("Kolízia!")
+            if not stala_sa_kolizia:
+                stala_sa_kolizia = True
+                score += 1
+                auto, auto_position, auto_mask = generate_car(config.ROZLISENIE, config.AUTO)
+        else:
+            stala_sa_kolizia = False
+
+        score_text = font.render(f"Skóre: {score}", True, (config.FARBA_SCORE_TEXT))
+        window.blit(score_text, (10, 10))
 
         pygame.display.update()
 
