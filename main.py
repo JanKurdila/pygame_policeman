@@ -24,7 +24,15 @@ def generate_car(game_res, car_image):
     car_width, car_height = car_image.get_size()
     x = random.randint(0, game_res[0] - car_width)
     y = random.randint(0, game_res[1] - car_height)
-    return car_image, (x, y)
+    return car_image, (x, y), pygame.mask.from_surface(car_image)
+    
+def is_collision(mask1, mask2, mask1_coordinate, mask2_coordinate):
+    """Funkcia zisti, či nastala kolízia"""
+    x_off = mask2_coordinate[0] - mask1_coordinate[0]
+    y_off = mask2_coordinate[1] - mask1_coordinate[1]
+    if mask1.overlap(mask2, (x_off, y_off)):
+        return True
+    return False
 
 if __name__ == "__main__":
     pygame.init()
@@ -32,9 +40,10 @@ if __name__ == "__main__":
     pygame.display.set_caption("Policajt verzus auta")
 
     policajt = config.POLICAJT
-    auto, auto_position = generate_car(config.ROZLISENIE, config.AUTO)
-
+    policajt_mask = pygame.mask.from_surface(policajt)
     x, y = config.ROZLISENIE[0] // 2, config.ROZLISENIE[1] // 2 # Inicializácia pozície policajta
+
+    auto, auto_position, auto_mask = generate_car(config.ROZLISENIE, config.AUTO)
 
     clock = pygame.time.Clock()
 
@@ -52,6 +61,9 @@ if __name__ == "__main__":
 
         window.blit(policajt, (x, y))
         window.blit(auto, auto_position)
+        
+        if is_collision(policajt_mask, auto_mask, (x, y), auto_position):
+            print("Kolízia!")
 
         pygame.display.update()
 
