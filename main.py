@@ -7,13 +7,13 @@ def move_policeman(x_coordinate, y_coordinate, keys):
     if keys[pygame.K_LEFT]:
         if x_coordinate > 10:  # Aby policajt nevyšiel za ľavý okraj
             x_coordinate -= config.STEP  # Pohyb policajta vľavo
-    if keys[pygame.K_RIGHT]:
+    elif keys[pygame.K_RIGHT]:
         if x_coordinate < config.ROZLISENIE[0] - config.POLICAJT.get_width() - 10:  # Aby policajt nevyšiel za pravý okraj
             x_coordinate += config.STEP  # Pohyb policajta vpravo
-    if keys[pygame.K_UP]:
+    elif keys[pygame.K_UP]:
         if y_coordinate > 10:  # Aby policajt nevyšiel hore za okraj
             y_coordinate -= config.STEP  # Pohyb policajta nahor
-    if keys[pygame.K_DOWN]:
+    elif keys[pygame.K_DOWN]:
         if y_coordinate < config.ROZLISENIE[1] - config.POLICAJT.get_height() - 10:  # Aby policajt nevyšiel dole za okraj
             y_coordinate += config.STEP  # Pohyb policajta nadol
     return x_coordinate, y_coordinate
