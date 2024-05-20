@@ -42,6 +42,8 @@ if __name__ == "__main__":
     font = config.FONT_SCORE_TEXT
     score = 0
 
+    zvuk = config.ZVUK_KOLIZIE
+
     policajt = config.POLICAJT
     policajt_mask = pygame.mask.from_surface(policajt)
     x, y = config.ROZLISENIE[0] // 2, config.ROZLISENIE[1] // 2 # Inicializácia pozície policajta
@@ -71,6 +73,7 @@ if __name__ == "__main__":
             if not stala_sa_kolizia:
                 stala_sa_kolizia = True
                 score += 1
+                zvuk.play()
                 auto, auto_position, auto_mask = generate_car(config.ROZLISENIE, config.AUTO)
         else:
             stala_sa_kolizia = False
